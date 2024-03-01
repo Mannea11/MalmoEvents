@@ -27,8 +27,7 @@ jobs:
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
-        with:
-          name: java-app
+
           path: '${{ github.workspace }}/target/*.jar'
 
   deploy:
