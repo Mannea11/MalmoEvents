@@ -14,14 +14,15 @@ import reactor.core.publisher.Mono;
 @Component
 public class TicketMasterClient {
 
-    private String API_KEY;
+    private final String API_KEY;
     private final String API_URL = "https://app.ticketmaster.com/discovery/v2/";
-    private WebClient webClient;
+    private final WebClient webClient;
 
     @Autowired
     public TicketMasterClient(WebClient.Builder webClientBuilder, @Value("${ticketmaster.api-key}") String apiKey) {
         this.API_KEY = apiKey;
         this.webClient = webClientBuilder.baseUrl(API_URL)
+                .defaultHeader("apikey", API_KEY)
                 .build();
     }
     public String getAll(){
