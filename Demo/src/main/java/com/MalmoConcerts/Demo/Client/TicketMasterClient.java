@@ -14,6 +14,7 @@ import reactor.core.publisher.Mono;
 @Component
 public class TicketMasterClient {
 
+
     private final String API_KEY;
     private final String API_URL = "https://app.ticketmaster.com/discovery/v2/";
     private final WebClient webClient;
