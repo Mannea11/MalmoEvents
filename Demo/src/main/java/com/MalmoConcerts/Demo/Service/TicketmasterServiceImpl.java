@@ -21,7 +21,7 @@ public class TicketmasterServiceImpl implements TicketmasterService {
         this.ticketMasterClient = ticketMasterClient;
     }
 
-    @Cacheable(value = "ticketMasterAllEventsCache", key = "{#page, #size}")
+//    @Cacheable(value = "ticketMasterAllEventsCache", key = "{#page, #size}")
     public Flux<TicketMasterInfoDTO> getAllEvents(int page, int size) {
         return ticketMasterClient.getEventsMalmo(page,size)
                 .map(event -> {

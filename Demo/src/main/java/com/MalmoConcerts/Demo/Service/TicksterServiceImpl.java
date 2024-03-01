@@ -55,7 +55,7 @@ public class TicksterServiceImpl implements TicksterService {
                 });
     }
 
-    @Cacheable(value = "ticksterEventByIdCache", key = "#id")
+ //   @Cacheable(value = "ticksterEventByIdCache", key = "#id")
     public Mono<TicksterCompleteInfoDTO> getEventsById(String id) {
         return ticksterClient.getEventsById(id)
                 .map(eventInfo -> {
