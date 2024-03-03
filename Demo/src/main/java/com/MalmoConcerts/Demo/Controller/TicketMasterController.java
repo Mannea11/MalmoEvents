@@ -4,6 +4,8 @@ import com.MalmoConcerts.Demo.Client.TicketMasterClient;
 import com.MalmoConcerts.Demo.DTO.TicketMaster.TicketMasterCompleteInfoDTO;
 import com.MalmoConcerts.Demo.DTO.TicketMaster.TicketMasterInfoDTO;
 import com.MalmoConcerts.Demo.Service.TicketmasterServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -28,7 +30,11 @@ public class TicketMasterController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "100") int size
     ) {
-        return ticketmasterServiceImpl.getAllEvents(page, size);
+        Logger logger = LoggerFactory.getLogger(this.getClass());
+
+        return ticketmasterServiceImpl.getAllEvents(page, size)
+                .doOnError(ex -> logger.error("Error fetching events: {}", ex.getMessage(), ex))
+                .onErrorResume(ex -> Flux.empty());
     }
 
     @GetMapping("category/{categoryId}")
